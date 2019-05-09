@@ -11,8 +11,14 @@ MAIN_SECRET_IMG_PATH='example_pics/secret_images/'
 FINAL_SECRET_IMG_PATH='example_pics/final_secret_images/'
 FINAL_CONTAINER_IMG_PATH='example_pics/container_images/'
 FINAL_CONTAINER_IMG_PATH2='example_pics/container_images2/'
-VIDEO_PATH='Videos/'
+VIDEO_PATH=''
+CONTAINER_VIDEO_PATH=''
 # Function to extract frames 
+def rchop(thestring, ending):
+    if thestring.endswith(ending):
+        return thestring[:-len(ending)]
+    return thestring
+
 def FrameCapture(path,folder_path): 
       
     for f in os.listdir(folder_path):
@@ -41,8 +47,9 @@ def FrameCapture(path,folder_path):
     return count
 
 def convert_to_frames(secret_path,cover_path):
-    # print("Secret Path is"+ secret_path)
-    # print("Cover Path is"+ cover_path)
+    global CONTAINER_VIDEO_PATH
+    print("Secret Path is "+ secret_path)
+    print("Cover Path is "+ cover_path)
     for the_file in os.listdir(COVER_IMG_PATH):
         os.remove(COVER_IMG_PATH+the_file)
     for the_file in os.listdir(SECRET_IMG_PATH):
@@ -79,13 +86,13 @@ def convert_to_frames(secret_path,cover_path):
     # to_residuals(SECRET_IMG_PATH,MAIN_SECRET_IMG_PATH)
     # reconstruct(MAIN_SECRET_IMG_PATH,FINAL_SECRET_IMG_PATH)
     os.system("CUDA_VISIBLE_DEVICES=0 python run.py --test=./example_pics --batchSize=1")
-    convert_frames_to_video(FINAL_SECRET_IMG_PATH,VIDEO_PATH+cover_path.strip(".mp4")+"_"+secret_path.slice(0,-4)+"_secret_video.mp4")
-    convert_frames_to_video(FINAL_CONTAINER_IMG_PATH,VIDEO_PATH+cover_path.slice(".mp4")+"_"+secret_path.slice(0,-4)+"_container_video.mp4")
-
+    convert_frames_to_video(FINAL_SECRET_IMG_PATH,rchop(cover_path,'.avi')+'_'+rchop(secret_path,'.avi')+'_secret_video.avi')
+    convert_frames_to_video(FINAL_CONTAINER_IMG_PATH,rchop(cover_path,'.avi')+'_'+rchop(secret_path,'.avi')+'_container_video.avi')
+    CONTAINER_VIDEO_PATH=rchop(cover_path,'.avi')+'_'+rchop(secret_path,'.avi')+'_container_video.avi'
 # Driver Code 
 # if __name__ == '__main__':
+# Calling the functiCUDA_VISIBLE_DEVICES=0 python run.py --test=./example_pics --batchSize=1on 
 
-    # Calling the functiCUDA_VISIBLE_DEVICES=0 python run.py --test=./example_pics --batchSize=1on 
 def convert_to_frames2(container_path):
     for the_file in os.listdir(FINAL_CONTAINER_IMG_PATH2):
         os.remove(FINAL_CONTAINER_IMG_PATH2+the_file) 

@@ -11,16 +11,18 @@ from keras.models import *
 from keras.layers import *
 from keras.layers.advanced_activations import *
 from tkinter.filedialog import askopenfilename
-from annotator import *
+# from annotator import *
 # from model import * 
 from video_crop_and_convert_to_frames import *
+from revealfunction import *
 import subprocess
 
 COVER_IMAGE_PATH='example_pics/cover_images/'
 SECRET_IMAGE_PATH='example_pics/secret_images/'
 CONTAINER_IMAGE_PATH='example_pics/container_images/'
-COVER_VIDEO_SOURCE='videoplayback.mp4'
-SECRET_VIDEO_SOURCE='hello.mp4'
+COVER_VIDEO_SOURCE='videoplayback.avi'
+SECRET_VIDEO_SOURCE='hello.avi'
+CONTAINER_VIDEO_SOURCE='videoplayback.avi'
 class App():
 	
 	def __init__(self, window, window_title, video_source = 0):
@@ -39,7 +41,7 @@ class App():
 		text = tkinter.Label(self.window, text = 'DEEP VIDEO STEGANOGRAPHY', bg = 'white', font = ('Arial', 36))
 		text.place(x = 50, y = 40)
 		# self.vid = MyVideoCapture(video_source)
-		# self.vid2 = MyVideoCapture('hello1.mp4')
+		# self.vid2 = MyVideoCapture('hello1.avi')
 
 		# self.VID_WIDTH = self.vid.width * 1 // 2
 		# self.VID_HEIGHT = self.vid.height *1 // 2
@@ -109,8 +111,8 @@ class App():
 		# root.resizable(width =  True, height = True)
 		text = tkinter.Label(root, text = 'HIDE VIDEO', bg = 'white', font = ('Arial', 36))
 		text.place(x = 50, y = 40)
-		self.vid = MyVideoCapture('hello.mp4')
-		self.vid2 = MyVideoCapture('hello.mp4')
+		self.vid = MyVideoCapture('hello.avi')
+		self.vid2 = MyVideoCapture('hello.avi')
 
 		self.VID_WIDTH = self.vid.width 
 		self.VID_HEIGHT = self.vid.height 
@@ -118,7 +120,7 @@ class App():
 		self.canvas1 = tkinter.Canvas(root, width = self.vid.width *1//2, height = self.vid.height*1//2)
 		self.canvas1.place(x=50,y=150)
 		tkinter.Button(root,text="UPLOAD SECRET VIDEO", command=self.browse1,bg="white",highlightcolor="grey",bd=3,font=('Arial',14)).place(x=80,y=450)
-		print(COVER_VIDEO_SOURCE)
+		# print(COVER_VIDEO_SOURCE)
 
 		self.canvas2 = tkinter.Canvas(root, width = self.vid.width*1//2, height = self.vid.height*1//2)
 		self.canvas2.place(x=500,y=150)
@@ -127,6 +129,10 @@ class App():
 		self.canvas3 = tkinter.Canvas(root, width = self.vid.width*1//2, height = self.vid.height*1//2)
 		self.canvas3.place(x=950,y=150)
 		tkinter.Button(root,text="GET CONTAINER VIDEO", command=lambda : convert_to_frames(SECRET_VIDEO_SOURCE,COVER_VIDEO_SOURCE),bg="white",highlightcolor="grey",bd=3,font=('Arial',14)).place(x=920,y=450)
+		# play this in container section
+		# CONTAINER_VIDEO_PATH=COVER_VIDEO_SOURCE.rstrip('.avi')+'_'+SECRET_VIDEO_SOURCE.rstrip('.avi')+'_container_video.avi'
+		global CONTAINER_VIDEO_PATH
+		print(CONTAINER_VIDEO_PATH)
 		text = tkinter.Label(root, text = 'Secret Video', bg = 'white', font = ('Arial', 14))
 		text.place(x = 60, y = 150)
 		
@@ -141,11 +147,18 @@ class App():
 	
 	def browse1(self):
 		filename=askopenfilename()
-		SECRET_VIDEO_SOURCE=filename
+		global SECRET_VIDEO_SOURCE
+		SECRET_VIDEO_SOURCE=os.path.basename(filename)
 	
 	def browse2(self):
 		filename=askopenfilename()
-		COVER_VIDEO_SOURCE=filename
+		global COVER_VIDEO_SOURCE
+		COVER_VIDEO_SOURCE=os.path.basename(filename)
+
+	def browse3(self):
+		filename=askopenfilename()
+		global CONTAINER_VIDEO_SOURCE
+		CONTAINER_VIDEO_SOURCE=os.path.basename(filename)
 
 	def create_thirdwindow(self):
 		root = tkinter.Tk()
@@ -157,8 +170,8 @@ class App():
 		# root.resizable(width =  True, height = True)
 		text = tkinter.Label(root, text = 'HIDE VIDEO', bg = 'white', font = ('Arial', 36))
 		text.place(x = 50, y = 40)
-		self.vid = MyVideoCapture('hello.mp4')
-		self.vid2 = MyVideoCapture('hello.mp4')
+		self.vid = MyVideoCapture('hello.avi')
+		self.vid2 = MyVideoCapture('hello.avi')
 
 		self.VID_WIDTH = self.vid.width 
 		self.VID_HEIGHT = self.vid.height 
@@ -171,15 +184,21 @@ class App():
 
 		self.canvas3 = tkinter.Canvas(root, width = self.vid.width*1//2, height = self.vid.height*1//2)
 		self.canvas3.place(x=950,y=150)
-
-		text = tkinter.Label(root, text = 'Secret Video', bg = 'white', font = ('Arial', 14))
+		tkinter.Button(root,text="UPLOAD CONTAINER VIDEO", command=self.browse3,bg="white",highlightcolor="grey",bd=3,font=('Arial',14)).place(x=520,y=450)
+		tkinter.Button(root,text="GET SECRET VIDEO", command=lambda : revealvideo(CONTAINER_VIDEO_SOURCE),bg="white",highlightcolor="grey",bd=3,font=('Arial',14)).place(x=920,y=450)
+		# play this in revealed secret section
+		# REVEALED_VIDEO_PATH="/Videos/"+COVER_VIDEO_SOURCE.rstrip(".avi")+"_"+SECRET_VIDEO_SOURCE.rstrip(".avi")+"_container_video.avi"
+		global REVEALED_VIDEO_PATH
+		print(REVEALED_VIDEO_PATH)
+		text = tkinter.Label(root, text = 'Container Video', bg = 'white', font = ('Arial', 14))
 		text.place(x = 60, y = 150)
 		
-		text = tkinter.Label(root, text = 'Cover Video', bg = 'white', font = ('Arial', 14))
+		text = tkinter.Label(root, text = 'Revealed Secret Video', bg = 'white', font = ('Arial', 14))
 		text.place(x = 510, y = 150)	
 
-		text = tkinter.Label(root, text = 'Container Video', bg = 'white', font = ('Arial', 14))
-		text.place(x = 960, y = 150)
+		# text = tkinter.Label(root, text = 'Container Video', bg = 'white', font = ('Arial', 14))
+		# text.place(x = 960, y = 150)
+
 		tkinter.Button(root	,text="QUIT", command=root.destroy,bg="white",highlightcolor="grey",bd=3,font=('Arial',14)).place(x=1200,y=730)
 
 		root.mainloop()
@@ -301,4 +320,4 @@ def __del__(self):
 	self.window.mainloop()
 
 # App(tkinter.Tk(), "Spine Endoscopy", '/home/sarthak/Desktop/videos/20190211103137/2018120010/ScopyVideos/1.asf')
-App(tkinter.Tk(), "Video Steganography", 'hello.mp4')
+App(tkinter.Tk(), "Video Steganography", 'hello.avi')
