@@ -1,0 +1,9 @@
+__pycache__/
+checkPoint/
+data/
+drive-download-20190310T124607Z-001/
+result/
+training/
+DockerFile
+ultra_weights_coco.h5
+whole_model

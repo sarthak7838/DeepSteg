@@ -1,0 +1,6 @@
+one chocolate n pieces each has some sweetness ai. Divide in k grps such that the person getting minimum has maximum sweetness possible
+
+n blocks , some highpoints(block id, name)  , some requirements (hospital,grocery) print min distance satisying requirements 
+
+
+string given , pattern size given , tell whether  
