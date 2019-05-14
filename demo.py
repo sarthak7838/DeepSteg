@@ -87,7 +87,7 @@ class PageOne(tkinter.Frame):
         tkinter.Button(self,text="GET CONTAINER VIDEO", command=lambda : convert_to_frames(SECRET_VIDEO_SOURCE,COVER_VIDEO_SOURCE),bg="white",highlightcolor="grey",bd=3,font=('Arial',14)).place(x=920,y=450)
         text = tkinter.Label(self, text = 'Secret Video', bg = 'white', font = ('Arial', 14))
         text.place(x = 60, y = 150)
-        
+        tkinter.Button(self,text="Play Videos", command=lambda: self.play_videos(),bg="white",highlightcolor="grey",bd=3,font=('Arial',14)).place(x=520,y=550)
         text = tkinter.Label(self, text = 'Cover Video', bg = 'white', font = ('Arial', 14))
         text.place(x = 510, y = 150)    
 
@@ -147,7 +147,8 @@ class PageOne(tkinter.Frame):
             self.vid2 = MyVideoCapture(COVER_VIDEO_SOURCE)
             self.vid3 = MyVideoCapture(ret_container_video_path())  
         self.update_idletasks()
-        self.after_idle(self.update)
+        self.after(30,self.update)
+        # self.window.after(15, self.update)
 
 
 
@@ -216,7 +217,8 @@ class PageTwo(tkinter.Frame):
             self.vid = MyVideoCapture(CONTAINER_VIDEO_SOURCE)
             self.vid2 = MyVideoCapture(ret_revealed_video_path())
         self.update_idletasks()
-        self.after_idle(self.update2)
+        self.after(30,self.update2)
+        # self.window.after(15, self.update2)
      
 
       

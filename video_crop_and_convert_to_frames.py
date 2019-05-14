@@ -100,6 +100,7 @@ def convert_to_frames2(container_path):
     for the_file in os.listdir(FINAL_CONTAINER_IMG_PATH2):
         os.remove(FINAL_CONTAINER_IMG_PATH2+the_file) 
     container_count=FrameCapture(container_path,FINAL_CONTAINER_IMG_PATH2)
+    os.remove(FINAL_CONTAINER_IMG_PATH2+'frame%03d.png'%(container_count-1))
     
 def ret_container_video_path():
     global CONTAINER_VIDEO_PATH

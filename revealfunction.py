@@ -101,13 +101,14 @@ class AverageMeter(object):
 
 def revealvideo(container_video_path):
 	global REVEALED_VIDEO_PATH
-	if(container_video_path.find("_container_video.avi")):
+	if(container_video_path.endswith("_container_video.avi")):
 		reveal_video_path=rchop(container_video_path,"_container_video.avi")+"_secret_video.avi"
 		# if(os.path.exists(reveal_video_path)):
 		REVEALED_VIDEO_PATH= reveal_video_path
 		print(REVEALED_VIDEO_PATH)
 	else:
-		reveal_video_path=VIDEO_PATH+rchop(container_video_path,'.avi')+"_secret_video.avi"
+		# print("hi"+container_video_path)
+		reveal_video_path=rchop(container_video_path,".avi")+"_secret_video.avi"
 		convert_to_frames2(container_video_path)
 		rev("container_images2")
 		convert_frames_to_video(FINAL_SECRET_IMG_PATH,reveal_video_path)
@@ -119,3 +120,4 @@ def revealvideo(container_video_path):
 def ret_revealed_video_path():
 	global REVEALED_VIDEO_PATH
 	return REVEALED_VIDEO_PATH
+
