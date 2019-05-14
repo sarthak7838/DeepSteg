@@ -115,3 +115,7 @@ def revealvideo(container_video_path):
 		# global REVEALED_VIDEO_PATH
 		REVEALED_VIDEO_PATH=reveal_video_path
 		print(REVEALED_VIDEO_PATH)
+
+def ret_revealed_video_path():
+	global REVEALED_VIDEO_PATH
+	return REVEALED_VIDEO_PATH

@@ -3,7 +3,7 @@ import cv2
 import PIL.Image, PIL.ImageTk
 import time
 from test import *
-import pyautogui
+# import pyautogui
 from utility import *
 import numpy as np
 import tensorflow as tf
@@ -20,8 +20,8 @@ import subprocess
 COVER_IMAGE_PATH='example_pics/cover_images/'
 SECRET_IMAGE_PATH='example_pics/secret_images/'
 CONTAINER_IMAGE_PATH='example_pics/container_images/'
-COVER_VIDEO_SOURCE='videoplayback.avi'
-SECRET_VIDEO_SOURCE='hello.avi'
+COVER_VIDEO_SOURCE='hello.avi'
+SECRET_VIDEO_SOURCE='videoplayback.avi'
 CONTAINER_VIDEO_SOURCE='videoplayback.avi'
 class App():
 	
@@ -46,56 +46,6 @@ class App():
 		# self.VID_WIDTH = self.vid.width * 1 // 2
 		# self.VID_HEIGHT = self.vid.height *1 // 2
 
-		# self.canvas1 = tkinter.Canvas(window, width = self.vid.width *1//2, height = self.vid.height*1//2)
-		# self.canvas1.place(x=50,y=150)
-
-		# self.canvas2 = tkinter.Canvas(window, width = self.vid.width*1//2, height = self.vid.height*1//2)
-		# self.canvas2.place(x=500,y=150)
-
-		# self.canvas3 = tkinter.Canvas(window, width = self.vid.width*1//2, height = self.vid.height*1//2)
-		# self.canvas3.place(x=950,y=150)
-
-		# text = tkinter.Label(self.window, text = 'Secret Video', bg = 'white', font = ('Arial', 14))
-		# text.place(x = 60, y = 150)
-		
-		# text = tkinter.Label(self.window, text = 'Cover Video', bg = 'white', font = ('Arial', 14))
-		# text.place(x = 510, y = 150)	
-
-		# text = tkinter.Label(self.window, text = 'Container Video', bg = 'white', font = ('Arial', 14))
-		# text.place(x = 960, y = 150)
-		
-		# color_list = {0:(255,0,0),1:(0,255,0),2:(0,0,255),3:(255,255,0),4:(255,0,127),5:(160,160,160),6:(0,0,0),7:(255,255,255),8:(51,0,0)}
-
-		# text = tkinter.Label(self.window, text = 'F - Fat epidural', bg = 'white', fg='red', font = ('Arial', 14))
-		# text.place(x = 80, y = 640)		
-		# text = tkinter.Label(self.window, text = 'A - Annulus', bg = 'white',fg='green', font = ('Arial', 14))
-		# text.place(x = 80, y = 670)		
-		# text = tkinter.Label(self.window, text = 'E - Endplate', bg = 'white',fg='blue', font = ('Arial', 14))
-		# text.place(x = 80, y = 700)		
-
-				
-		# text = tkinter.Label(self.window, text = 'O - Opening in the Disc', fg='#FF007F',bg = 'white', font = ('Arial', 14))
-		# text.place(x = 480, y = 640)		
-		# text = tkinter.Label(self.window, text = 'N - Nerve after cutting annulus', fg='#A0A0A0',bg = 'white', font = ('Arial', 14))
-		# text.place(x = 480, y = 670)		
-
-		# text = tkinter.Label(self.window, text = 'B - Bone of Facet', bg = 'white', fg='black', font = ('Arial', 14))
-		# text.place(x = 480, y = 700)		
-		# text = tkinter.Label(self.window, text = 'D - Disc material to be removed ', fg='#00FFFF',bg = 'white', font = ('Arial', 14))
-		# text.place(x =880, y = 640)		
-		# text = tkinter.Label(self.window, text = 'I - Instrument', bg = 'white', fg='brown', font = ('Arial', 14))
-		# text.place(x = 880, y = 670)
-
-		# self.warning = tkinter.Label(self.window, text = 'Caution : Near nerve', fg = 'red', bg = 'white', font = ('Arial', 36))
-
-		# self.update()
-
-		# self.btn_snapshot = tkinter.Button(self.window, text='Take Snapshot', command = self.snapshot, bg='black', fg='white', font=('Arial',14), highlightcolor='grey', width = 30)
-		# self.btn_snapshot.place(x=50, y = 730)
-
-
-		# self.btn_snapshot2 = tkinter.Button(self.window, text='Add to Training Data', command = self.snapshot2, bg='black', fg='white', font=('Arial',14), highlightcolor='grey', width = 30)
-		# self.btn_snapshot2.place(x=450, y = 730)
 		tkinter.Button(self.window,text="HIDE VIDEO", command=self.create_secondwindow,bg="white",highlightcolor="grey",bd=3,font=('Arial',14)).place(x=250,y=430)
 		tkinter.Button(self.window,text="REVEAL VIDEO", command=self.create_thirdwindow,bg="white",highlightcolor="grey",bd=3,font=('Arial',14)).place(x=550,y=430)
 		tkinter.Button(self.window,text="QUIT", command=self.window.destroy,bg="white",highlightcolor="grey",bd=3,font=('Arial',14)).place(x=1200,y=730)
@@ -111,28 +61,30 @@ class App():
 		# root.resizable(width =  True, height = True)
 		text = tkinter.Label(root, text = 'HIDE VIDEO', bg = 'white', font = ('Arial', 36))
 		text.place(x = 50, y = 40)
-		self.vid = MyVideoCapture('hello.avi')
-		self.vid2 = MyVideoCapture('hello.avi')
 
-		self.VID_WIDTH = self.vid.width 
-		self.VID_HEIGHT = self.vid.height 
+		self.vid = MyVideoCapture('hello.avi')
+		# self.vid2 = MyVideoCapture(COVER_VIDEO_SOURCE)
+		# self.vid3 = MyVideoCapture(CONTAINER_VIDEO_SOURCE)
+		
+		# self.VID_WIDTH = self.vid.width 
+		# self.VID_HEIGHT = self.vid.height 
 
 		self.canvas1 = tkinter.Canvas(root, width = self.vid.width *1//2, height = self.vid.height*1//2)
-		self.canvas1.place(x=50,y=150)
+		self.canvas1.place(x=50,y=200)
 		tkinter.Button(root,text="UPLOAD SECRET VIDEO", command=self.browse1,bg="white",highlightcolor="grey",bd=3,font=('Arial',14)).place(x=80,y=450)
 		# print(COVER_VIDEO_SOURCE)
 
 		self.canvas2 = tkinter.Canvas(root, width = self.vid.width*1//2, height = self.vid.height*1//2)
-		self.canvas2.place(x=500,y=150)
+		self.canvas2.place(x=500,y=200)
 		tkinter.Button(root,text="UPLOAD COVER VIDEO", command=self.browse2,bg="white",highlightcolor="grey",bd=3,font=('Arial',14)).place(x=520,y=450)
 		# print(SECRET_VIDEO_SOURCE)
 		self.canvas3 = tkinter.Canvas(root, width = self.vid.width*1//2, height = self.vid.height*1//2)
-		self.canvas3.place(x=950,y=150)
+		self.canvas3.place(x=950,y=200)
 		tkinter.Button(root,text="GET CONTAINER VIDEO", command=lambda : convert_to_frames(SECRET_VIDEO_SOURCE,COVER_VIDEO_SOURCE),bg="white",highlightcolor="grey",bd=3,font=('Arial',14)).place(x=920,y=450)
 		# play this in container section
 		# CONTAINER_VIDEO_PATH=COVER_VIDEO_SOURCE.rstrip('.avi')+'_'+SECRET_VIDEO_SOURCE.rstrip('.avi')+'_container_video.avi'
-		global CONTAINER_VIDEO_PATH
-		print(CONTAINER_VIDEO_PATH)
+		tkinter.Button(root,text="Play Videos", command=lambda: self.play_videos(),bg="white",highlightcolor="grey",bd=3,font=('Arial',14)).place(x=520,y=550)
+		
 		text = tkinter.Label(root, text = 'Secret Video', bg = 'white', font = ('Arial', 14))
 		text.place(x = 60, y = 150)
 		
@@ -142,7 +94,7 @@ class App():
 		text = tkinter.Label(root, text = 'Container Video', bg = 'white', font = ('Arial', 14))
 		text.place(x = 960, y = 150)
 		tkinter.Button(root,text="QUIT", command=root.destroy,bg="white",highlightcolor="grey",bd=3,font=('Arial',14)).place(x=1200,y=730)
-
+		# self.update()
 		root.mainloop()
 	
 	def browse1(self):
@@ -170,31 +122,32 @@ class App():
 		# root.resizable(width =  True, height = True)
 		text = tkinter.Label(root, text = 'HIDE VIDEO', bg = 'white', font = ('Arial', 36))
 		text.place(x = 50, y = 40)
+
 		self.vid = MyVideoCapture('hello.avi')
-		self.vid2 = MyVideoCapture('hello.avi')
+		# self.vid2 = MyVideoCapture(COVER_VIDEO_SOURCE)
+		# self.vid3 = MyVideoCapture(CONTAINER_VIDEO_SOURCE)
+		
+		# self.VID_WIDTH = self.vid.width 
+		# self.VID_HEIGHT = self.vid.height 
 
-		self.VID_WIDTH = self.vid.width 
-		self.VID_HEIGHT = self.vid.height 
-
-		self.canvas1 = tkinter.Canvas(root, width = self.vid.width *1//2, height = self.vid.height*1//2)
-		self.canvas1.place(x=50,y=150)
+		self.canvas1 = tkinter.Canvas(root, width = self.vid.width*1//2, height = self.vid.height*1//2)
+		self.canvas1.place(x=300,y=200)
 
 		self.canvas2 = tkinter.Canvas(root, width = self.vid.width*1//2, height = self.vid.height*1//2)
-		self.canvas2.place(x=500,y=150)
+		self.canvas2.place(x=800,y=200)
 
-		self.canvas3 = tkinter.Canvas(root, width = self.vid.width*1//2, height = self.vid.height*1//2)
-		self.canvas3.place(x=950,y=150)
-		tkinter.Button(root,text="UPLOAD CONTAINER VIDEO", command=self.browse3,bg="white",highlightcolor="grey",bd=3,font=('Arial',14)).place(x=520,y=450)
-		tkinter.Button(root,text="GET SECRET VIDEO", command=lambda : revealvideo(CONTAINER_VIDEO_SOURCE),bg="white",highlightcolor="grey",bd=3,font=('Arial',14)).place(x=920,y=450)
+		tkinter.Button(root,text="UPLOAD CONTAINER VIDEO", command=self.browse3,bg="white",highlightcolor="grey",bd=3,font=('Arial',14)).place(x=300,y=450)
+		tkinter.Button(root,text="GET SECRET VIDEO", command=lambda : revealvideo(CONTAINER_VIDEO_SOURCE),bg="white",highlightcolor="grey",bd=3,font=('Arial',14)).place(x=800,y=450)
+		tkinter.Button(root,text="Play Videos", command=lambda: self.play_videos2(),bg="white",highlightcolor="grey",bd=3,font=('Arial',14)).place(x=520,y=550)
 		# play this in revealed secret section
 		# REVEALED_VIDEO_PATH="/Videos/"+COVER_VIDEO_SOURCE.rstrip(".avi")+"_"+SECRET_VIDEO_SOURCE.rstrip(".avi")+"_container_video.avi"
 		global REVEALED_VIDEO_PATH
 		print(REVEALED_VIDEO_PATH)
 		text = tkinter.Label(root, text = 'Container Video', bg = 'white', font = ('Arial', 14))
-		text.place(x = 60, y = 150)
+		text.place(x = 300, y = 150)
 		
 		text = tkinter.Label(root, text = 'Revealed Secret Video', bg = 'white', font = ('Arial', 14))
-		text.place(x = 510, y = 150)	
+		text.place(x = 800, y = 150)	
 
 		# text = tkinter.Label(root, text = 'Container Video', bg = 'white', font = ('Arial', 14))
 		# text.place(x = 960, y = 150)
@@ -203,97 +156,80 @@ class App():
 
 		root.mainloop()
 	
+	def play_videos(self):
+		self.vid = MyVideoCapture(SECRET_VIDEO_SOURCE)
+		self.vid2 = MyVideoCapture(COVER_VIDEO_SOURCE)
+		self.vid3 = MyVideoCapture(ret_container_video_path())
+		self.update()
+
 	def update(self):
 		ret, self.frame = self.vid.get_frame()
 		ret2,self.frame2=self.vid2.get_frame()
-		if ret:
-			image = PIL.Image.fromarray(self.frame)
-			image = image.resize((image.size[0]*1//2, image.size[1]*1//2), PIL.Image.ANTIALIAS)
-			self.photo1 = PIL.ImageTk.PhotoImage(image = image)
+		ret3,self.frame3=self.vid3.get_frame()
+		self.vid4=MyVideoCapture('hello.avi')
+		if ret or ret2 or ret3:
+			if ret:				
+				image = PIL.Image.fromarray(self.frame)
+				image= image.resize((int(self.vid4.width//2),int(self.vid4.height//2)),PIL.Image.ANTIALIAS)
+				self.photo1 = PIL.ImageTk.PhotoImage(image = image, master=self.canvas1)
+				self.photo11=cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGB)
+				cv2.imwrite(COVER_IMAGE_PATH+'a.jpg',self.photo11)
+				self.canvas1.create_image(0, 0, image = self.photo1, anchor=tkinter.NW)
+			if ret2:
+				image = PIL.Image.fromarray(self.frame2)
+				image= image.resize((int(self.vid4.width//2),int(self.vid4.height//2)),PIL.Image.ANTIALIAS)
+				self.photo2 = PIL.ImageTk.PhotoImage(image = image, master=self.canvas2)
+				self.photo21=cv2.cvtColor(self.frame2, cv2.COLOR_BGR2RGB)
+				cv2.imwrite(SECRET_IMAGE_PATH+'b.jpg',self.photo21)
+				self.canvas2.create_image(0, 0, image = self.photo2, anchor=tkinter.NW)
+			if ret3:
+				image = PIL.Image.fromarray(self.frame3)
+				image= image.resize((int(self.vid4.width//2),int(self.vid4.height//2)),PIL.Image.ANTIALIAS)
+				self.photo3 = PIL.ImageTk.PhotoImage(image = image, master=self.canvas3)
+				self.photo31=cv2.cvtColor(self.frame3, cv2.COLOR_BGR2RGB)
+				cv2.imwrite(SECRET_IMAGE_PATH+'b.jpg',self.photo31)
+				self.canvas3.create_image(0, 0, image = self.photo3, anchor=tkinter.NW)
 			
-			image = PIL.Image.fromarray(self.frame2)
-			image = image.resize((image.size[0]*1//2, image.size[1]*1//2), PIL.Image.ANTIALIAS)
-			self.photo2 = PIL.ImageTk.PhotoImage(image = image)
-			for f in os.listdir(COVER_IMAGE_PATH):
-				# os.remove(f)
-				print(f)
-			for f in os.listdir(SECRET_IMAGE_PATH):
-				# os.remove(f)
-				print(f)
-			for f in os.listdir(CONTAINER_IMAGE_PATH):
-				# os.remove(f)
-				print(f)
-			self.photo11=cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGB)
-			self.photo21=cv2.cvtColor(self.frame2, cv2.COLOR_BGR2RGB)
-			cv2.imwrite(COVER_IMAGE_PATH+'a.jpg',self.photo11)
-			cv2.imwrite(SECRET_IMAGE_PATH+'b.jpg',self.photo21)
-			os.system("CUDA_VISIBLE_DEVICES=0 python run.py --test=./example_pics --batchSize=1")
-			# annotated_frame, coord_list = self.annotated(self.frame);
-			# annotated_frame = draw_bounding_box(annotated_frame, coord_list)
-			# annotated_image = PIL.Image.fromarray(annotated_frame)
-			# annotated_image = annotated_image.resize((annotated_image.size[0]*5//6, annotated_image.size[1]*5//6), PIL.Image.ANTIALIAS)
-			# self.photo2 = PIL.ImageTk.PhotoImage(image = annotated_image)			
-			if self.frame_count == 0:
-				# annotated_frame, coord_list, score = annotated(self.model,self.frame,self.VID_WIDTH,self.VID_HEIGHT)
-				# self.warning.place(x = 900, y = 40)
-				# if 6 not in coord_list:
-				# 	self.warning.place_forget()
-	
-				# annotated_frame = draw_bounding_box(annotated_frame, coord_list,self.VID_WIDTH*2//1)
-				self.annotated_frame1=cv2.imread(CONTAINER_IMAGE_PATH+"c.jpg")
-				annotated_frame=self.annotated_frame1
-				self.frame3=annotated_frame
-				annotated_image = PIL.Image.fromarray(annotated_frame)
-				annotated_image = annotated_image.resize((annotated_image.size[0], annotated_image.size[1]), PIL.Image.ANTIALIAS)
-				self.photo3 = PIL.ImageTk.PhotoImage(image = annotated_image)			
-			self.frame_count = (self.frame_count + 1)%2
-
-			self.canvas1.create_image(0, 0, image = self.photo1, anchor=tkinter.NW)
-			self.canvas2.create_image(0, 0, image = self.photo2, anchor=tkinter.NW)
-			self.canvas3.create_image(0, 0, image = self.photo3, anchor=tkinter.NW)
-
+		else:	
+			self.vid = MyVideoCapture(SECRET_VIDEO_SOURCE)
+			self.vid2 = MyVideoCapture(COVER_VIDEO_SOURCE)
+			self.vid3 = MyVideoCapture(ret_container_video_path())	
 		self.window.update_idletasks()
 		self.window.after_idle(self.update)
 
+	def play_videos2(self):
+		self.vid3=MyVideoCapture('hello.avi')
+		self.vid = MyVideoCapture(CONTAINER_VIDEO_SOURCE)
+		self.vid2 = MyVideoCapture(ret_revealed_video_path())
+		self.update2()
 
-	def snapshot(self):
-		# Get a frame from the video source
-		pyautogui.screenshot("screenshots/frame-" + time.strftime("%d-%m-%Y-%H-%M-%S") + ".jpg")
-
-	def snapshot2(self):
-		self.frame2=cv2.cvtColor(self.frame2, cv2.COLOR_BGR2RGB)
-		cv2.imwrite("training_data/frame-" + time.strftime("%d-%m-%Y-%H-%M-%S") + ".jpg",self.frame2)
-
-	# def annotated(self, frame):
-	# 	# ret, frame = self.vid2.get_frame()
-		
-	# 	input_img = cv2.resize(frame, (416, 416)) / 255.
-	# 	input_img = input_img[:,:,::-1]
-	# 	input_img = np.expand_dims(input_img, 0)
-
-	# 	dummy_array = np.zeros((1,1,1,1,TRUE_BOX_BUFFER, 4))
-
-	# 	netout = self.model.predict([input_img, dummy_array])
-	# 	boxes = decode_netout(netout[0],
-	# 							obj_threshold = 0.3,
-	# 							nms_threshold = 0.3,
-	# 							anchors = ANCHORS,
-	# 							nb_class = CLASS)
-	# 	coord = {}
-	# 	maxscore = {}
-	# 	for box in boxes:
-	# 		xmin, xmax, ymin, ymax, label, score = box.xmin, box.xmax, box.ymin, box.ymax, box.get_label(), box.get_score()
-	# 		labelx = int(float(LABELS[label]))
-
-	# 		if labelx not in coord or score > maxscore[labelx]:
-	# 			coord[labelx] = [(int(xmin * self.VID_WIDTH), int(ymin * self.VID_HEIGHT)), (int(xmax * self.VID_WIDTH), int(ymax * self.VID_HEIGHT))]
-	# 			maxscore[labelx] = score
-
-	# 	# print(len(coord))
-	# 	# coordinate_list={ 0:[(0,0),(50,50)], 1:[(50,50),(100,100)], 2:[(100,100),(150,150)], 5:[(200,200),(250,250)], 6:[(250,250),(300,300)], 7:[(300,300),(350,350)], 9:[(350,350),(400,400)], 10:[(400,400),(450,450)]}
-	# 	# return frame, coordinate_list
-	# 	return frame, coord, maxscore
-
+	def update2(self):
+		ret, self.frame = self.vid.get_frame()
+		ret2,self.frame2=self.vid2.get_frame()
+		if ret or ret2:
+			if ret:				
+				image = PIL.Image.fromarray(self.frame)
+				# image = image.resize((image.size[0]*1//2, image.size[1]*1//2), PIL.Image.ANTIALIAS)
+				image= image.resize((int(self.vid3.width//2),int(self.vid3.height//2)),PIL.Image.ANTIALIAS)
+				self.photo1 = PIL.ImageTk.PhotoImage(image = image, master=self.canvas1)
+				self.photo11=cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGB)
+				cv2.imwrite(COVER_IMAGE_PATH+'a.jpg',self.photo11)
+				self.canvas1.create_image(0, 0, image = self.photo1, anchor=tkinter.NW)
+			if ret2:
+				image = PIL.Image.fromarray(self.frame2)
+				# image = image.resize((image.size[0]*1//2, image.size[1]*1//2), PIL.Image.ANTIALIAS)
+				image= image.resize((int(self.vid3.width//2),int(self.vid3.height//2)),PIL.Image.ANTIALIAS)
+				self.photo2 = PIL.ImageTk.PhotoImage(image = image, master=self.canvas2)
+				self.photo21=cv2.cvtColor(self.frame2, cv2.COLOR_BGR2RGB)
+				cv2.imwrite(SECRET_IMAGE_PATH+'b.jpg',self.photo21)
+				self.canvas2.create_image(0, 0, image = self.photo2, anchor=tkinter.NW)
+			
+		else:	
+			self.vid = MyVideoCapture(CONTAINER_VIDEO_SOURCE)
+			self.vid2 = MyVideoCapture(ret_revealed_video_path())
+		self.window.update_idletasks()
+		self.window.after_idle(self.update2)
+	
 class MyVideoCapture:
 	def __init__(self, video_source = 0):
 		self.vid = cv2.VideoCapture(video_source)
