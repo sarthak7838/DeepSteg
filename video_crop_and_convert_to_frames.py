@@ -13,6 +13,7 @@ FINAL_CONTAINER_IMG_PATH='example_pics/container_images/'
 FINAL_CONTAINER_IMG_PATH2='example_pics/container_images2/'
 VIDEO_PATH=''
 CONTAINER_VIDEO_PATH=''
+SECRET_VIDEO_PATH=''
 # Function to extract frames 
 def rchop(thestring, ending):
     if thestring.endswith(ending):
@@ -48,6 +49,7 @@ def FrameCapture(path,folder_path):
 
 def convert_to_frames(secret_path,cover_path):
     global CONTAINER_VIDEO_PATH
+    global SECRET_VIDEO_PATH
     print("Secret Path is "+ secret_path)
     print("Cover Path is "+ cover_path)
     for the_file in os.listdir(COVER_IMG_PATH):
@@ -66,8 +68,8 @@ def convert_to_frames(secret_path,cover_path):
     os.remove(MAIN_SECRET_IMG_PATH+'frame%03d.png'%(secret_count-1))
     cover_count=cover_count-1
     secret_count=secret_count-1;
-    # print(cover_count)
-    # print(secret_count)
+    print(cover_count)
+    print(secret_count)
     if cover_count>secret_count:
         for i in range(secret_count,cover_count):
             the_file="frame%03d.png" % i
@@ -86,9 +88,10 @@ def convert_to_frames(secret_path,cover_path):
     # to_residuals(SECRET_IMG_PATH,MAIN_SECRET_IMG_PATH)
     # reconstruct(MAIN_SECRET_IMG_PATH,FINAL_SECRET_IMG_PATH)
     os.system("CUDA_VISIBLE_DEVICES=0 python run.py --test=./example_pics --batchSize=1")
-    convert_frames_to_video(FINAL_SECRET_IMG_PATH,rchop(cover_path,'.avi')+'_'+rchop(secret_path,'.avi')+'_secret_video.avi')
-    convert_frames_to_video(FINAL_CONTAINER_IMG_PATH,rchop(cover_path,'.avi')+'_'+rchop(secret_path,'.avi')+'_container_video.avi')
+    SECRET_VIDEO_PATH=rchop(cover_path,'.avi')+'_'+rchop(secret_path,'.avi')+'_secret_video.avi'
+    convert_frames_to_video(FINAL_SECRET_IMG_PATH,SECRET_VIDEO_PATH)
     CONTAINER_VIDEO_PATH=rchop(cover_path,'.avi')+'_'+rchop(secret_path,'.avi')+'_container_video.avi'
+    convert_frames_to_video(FINAL_CONTAINER_IMG_PATH,CONTAINER_VIDEO_PATH)
 # Driver Code 
 # if __name__ == '__main__':
 # Calling the functiCUDA_VISIBLE_DEVICES=0 python run.py --test=./example_pics --batchSize=1on 
@@ -97,4 +100,11 @@ def convert_to_frames2(container_path):
     for the_file in os.listdir(FINAL_CONTAINER_IMG_PATH2):
         os.remove(FINAL_CONTAINER_IMG_PATH2+the_file) 
     container_count=FrameCapture(container_path,FINAL_CONTAINER_IMG_PATH2)
-     
+    
+def ret_container_video_path():
+    global CONTAINER_VIDEO_PATH
+    return CONTAINER_VIDEO_PATH
+
+def ret_secret_video_path():
+    global SECRET_VIDEO_PATH
+    return SECRET_VIDEO_PATH
