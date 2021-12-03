@@ -12,6 +12,6 @@ def draw_bounding_box(image, coordinate_list,width):
 		# if(text==2):
 		# 	cv2.rectangle(image,((int)(width)-item[1][0],item[0][1]),((int)(width)-item[0][0],item[1][1]),color_list[text],2)
 		# 	cv2.putText(image, label_list[text], (x+5,y), cv2.FONT_HERSHEY_SIMPLEX, 1.0, color_list[text], 2, cv2.LINE_AA)
-
+	# image=cv2.imread("abc.jpeg")
 	# cv2.imwrite('image.jpeg', image)
 	return image
